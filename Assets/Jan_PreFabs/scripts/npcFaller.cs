@@ -3,6 +3,7 @@ using UnityEngine;
 public class LimitSpeed : MonoBehaviour
 {
     public float maxSpeed; // Maximale Geschwindigkeit
+  public int scoreValue = 1;
 
     private Rigidbody rb;
     private npcSpawnManagement spawnManager;
@@ -39,6 +40,7 @@ public class LimitSpeed : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             Destroy(gameObject);
+      GameManager.Instance.AddScore(scoreValue);
 
             // if gameobject needs to persist just stop rendering it
             //rend.enabled = false;

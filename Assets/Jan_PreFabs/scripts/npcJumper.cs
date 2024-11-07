@@ -7,8 +7,9 @@ public class NpcJumper : MonoBehaviour
     private Vector3 startingPosition;
     private float timeSinceStart;
     private npcSpawnManagement spawnManager;
+  public int scoreValue = 1;
 
-    public float jumpSpeed;
+  public float jumpSpeed;
     public float gravity;
 
     void Start()
@@ -52,9 +53,10 @@ public class NpcJumper : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             Destroy(gameObject);
+      GameManager.Instance.AddScore(scoreValue);
 
-            // if gameobject needs to persist just stop rendering it
-            //rend.enabled = false;
-        }
+      // if gameobject needs to persist just stop rendering it
+      //rend.enabled = false;
+    }
     }
 }

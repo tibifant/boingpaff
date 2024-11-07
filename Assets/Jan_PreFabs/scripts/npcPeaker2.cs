@@ -8,8 +8,9 @@ public class npcPeaker2 : MonoBehaviour
     public float restingPointY = 5f;
     public float restingTime = 1f;
     public float riseSpeed = 0.5f;
+  public int scoreValue = 1;
 
-    private Rigidbody rb;
+  private Rigidbody rb;
     private float timeResting;
     private bool hasRisen;
     private npcSpawnManagement spawnManager;
@@ -68,9 +69,10 @@ public class npcPeaker2 : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             Destroy(gameObject);
+      GameManager.Instance.AddScore(scoreValue);
 
-            // if gameobject needs to persist just stop rendering it
-            //rend.enabled = false;
-        }
+      // if gameobject needs to persist just stop rendering it
+      //rend.enabled = false;
+    }
     }
 }
