@@ -86,7 +86,7 @@ public class BallSoundController : MonoBehaviour
         // Überprüfe, ob das kollidierte Objekt der Tube ist
         if (other.CompareTag("Tube")) // Stelle sicher, dass der Tube den Tag "Tube" hat
         {
-            float adjustedCollisionVolume = Mathf.Clamp(collisionSoundVolume * 100.0f, 0f, maxTubeCollisionSoundVolume);
+            float adjustedCollisionVolume = Mathf.Clamp(collisionSoundVolume * 1.0f, 0f, maxTubeCollisionSoundVolume);
             AudioSource.PlayClipAtPoint(triggerCollisionSound, transform.position, adjustedCollisionVolume);
             // Setze die Flag für die Dämpfung auf true, um die Lautstärke zu verringern
             isInDampingZone = true;

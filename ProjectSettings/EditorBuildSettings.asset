@@ -8,9 +8,12 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/SampleScene.unity
     guid: 99c9720ab356a0642a771bea13969a05
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/DemoScene.unity
     guid: bd31cb5b1aab9fd4c833d051134d64a7
+  - enabled: 1
+    path: Assets/Scenes/mergingMalinAndJan.unity
+    guid: 65e57d21c4f4937458e026da866f85c8
   m_configObjects:
     com.unity.xr.management.loader_settings: {fileID: 11400000, guid: d9e2c349c70e51e43b73b01f518a08cf,
       type: 2}

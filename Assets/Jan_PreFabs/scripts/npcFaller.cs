@@ -32,4 +32,17 @@ public class LimitSpeed : MonoBehaviour
         spawnManager.setSpawnPositionsInUse(gameObject);
     }
 
+    void OnTriggerEnter(Collider other)
+    {
+        //Debug.Log("Collision detected with: " + collision.gameObject.name);
+
+        if (other.CompareTag("Player"))
+        {
+            Destroy(gameObject);
+
+            // if gameobject needs to persist just stop rendering it
+            //rend.enabled = false;
+        }
+    }
+
 }
