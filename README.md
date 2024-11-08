@@ -1,8 +1,8 @@
-##Boing! Paff!
+## Boing! Paff!
 
 Boing! Paff! ist ein VR Singleplayer-Spiel, erstellt mit Unity.
 
-#Boing! Paff!
+# Boing! Paff!
 The pins revenge!
 
 Den Bowling-Pins reicht's!
@@ -18,5 +18,8 @@ Things to come:
 - Gameplay anpassen, Spaß maximieren (Timing etc.)
 - Start-Menü
 - Special Actions für Strikes etc.
+- Bugfixes und Testing
 - Viele bunte Idee für coole Gameplay-Features
 - etc.
+
+Erstellt von: Jan, Frith, Paul, Malin, Hendrik
