@@ -9,7 +9,7 @@ public class GameManager : MonoBehaviour
     public TextMeshPro scoreText3D;     // Textfeld für den aktuellen Score
     public TextMeshPro highScoreText3D; // Neues Textfeld für den Highscore
     public int motivationSoundInterval = 20;
-    private float gameDuration = 10f;
+    private float gameDuration = 120f;
     private float timer;
     private bool isGameActive = false;
 
@@ -51,7 +51,6 @@ public class GameManager : MonoBehaviour
         if (isGameActive)
         {
             timer -= Time.deltaTime;
-            scoreText3D.text = currentScore.ToString("F0");
 
             if (timer <= 0)
             {
