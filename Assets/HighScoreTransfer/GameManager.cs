@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using TMPro;
 using System.Collections.Generic;
 
@@ -7,7 +6,8 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
     public int currentScore = 0;
-    public TextMeshPro scoreText3D; // TextMeshPro für 3D-Textfeld
+    public TextMeshPro scoreText3D;     // Textfeld für den aktuellen Score
+    public TextMeshPro highScoreText3D; // Neues Textfeld für den Highscore
     public int motivationSoundInterval = 20;
     private float gameDuration = 10f;
     private float timer;
@@ -35,6 +35,7 @@ public class GameManager : MonoBehaviour
     {
         audioSource = gameObject.AddComponent<AudioSource>();
         StartGame();
+        UpdateHighScoreDisplay(); // Highscore-Anzeige initialisieren
     }
 
     public void StartGame()
@@ -62,6 +63,7 @@ public class GameManager : MonoBehaviour
     public void AddScore(int amount)
     {
         currentScore += amount;
+        scoreText3D.text = currentScore.ToString("F0");
 
         // Prüfen, ob der Score ein Vielfaches von 20 ist
         if (currentScore % motivationSoundInterval == 0)
@@ -72,13 +74,11 @@ public class GameManager : MonoBehaviour
 
     private void PlayNextScoreSound()
     {
-        // Falls keine Sounds in der Queue sind, die Queue neu mischen
         if (soundQueue.Count == 0)
         {
             RefreshSoundQueue();
         }
 
-        // Den nächsten Sound aus der Queue nehmen und abspielen
         if (soundQueue.Count > 0)
         {
             AudioClip clip = soundQueue[0];
@@ -89,7 +89,6 @@ public class GameManager : MonoBehaviour
 
     private void RefreshSoundQueue()
     {
-        // Sounds in zufälliger Reihenfolge zur Queue hinzufügen
         soundQueue = new List<AudioClip>(scoreSounds);
         for (int i = 0; i < soundQueue.Count; i++)
         {
@@ -104,7 +103,7 @@ public class GameManager : MonoBehaviour
     {
         isGameActive = false;
         SaveHighScore();
-        SceneManager.LoadScene("MainMenu");
+        ResetGame();
     }
 
     private void SaveHighScore()
@@ -113,15 +112,33 @@ public class GameManager : MonoBehaviour
         if (currentScore > highScore)
         {
             PlayerPrefs.SetInt("HighScore", currentScore);
+            UpdateHighScoreDisplay(); // Anzeige aktualisieren
         }
+    }
+
+    private void UpdateHighScoreDisplay()
+    {
+        highScoreText3D.text = GetHighScore().ToString("F0");
     }
 
     public int GetHighScore()
     {
         return PlayerPrefs.GetInt("HighScore", 0);
     }
+
+    public void ResetGame()
+    {
+        currentScore = 0;
+        timer = gameDuration;
+        isGameActive = true;
+        RefreshSoundQueue();
+        scoreText3D.text = "Score: 0";
+        UpdateHighScoreDisplay();
+    }
+
     public void ResetScore()
     {
         PlayerPrefs.SetInt("HighScore", 0);
+        UpdateHighScoreDisplay(); // Highscore-Anzeige auf 0 setzen
     }
 }

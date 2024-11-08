@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class npcPeaker2 : MonoBehaviour
 {
+    public GameObject scaleReference;
     public float restingPointY = 5f;
     public float restingTime = 1f;
     public float riseSpeed = 0.5f;
@@ -16,6 +17,12 @@ public class npcPeaker2 : MonoBehaviour
     private npcSpawnManagement spawnManager;
     private bool gotHit = false;
 
+    public AudioClip startClip;     // Audioclip für Start
+    public AudioClip destroyClip;   // Audioclip für Destroy
+    private AudioSource audioSource;
+
+    public GameObject hitEffectPrefab; // Prefab für den Partikel-Effekt
+
     void Start()
     {
         spawnManager = FindObjectOfType<npcSpawnManagement>();
@@ -24,6 +31,8 @@ public class npcPeaker2 : MonoBehaviour
         rb.constraints = RigidbodyConstraints.FreezeRotation;
         timeResting = 0;
         hasRisen = false;
+
+        handleStartAudio();
     }
 
     void FixedUpdate()
@@ -46,12 +55,37 @@ public class npcPeaker2 : MonoBehaviour
             rb.constraints = RigidbodyConstraints.None;
             rb.useGravity = true;
             Debug.Log("Gravity is on");
-            if (rb.position.y < - 0.1)
+            if (rb.position.y < gameObject.transform.localScale.y/1.9)
             {
                 Destroy(gameObject);
             }
         }
     }
+
+    void handleStartAudio()
+    {
+        // AudioSource-Komponente abrufen oder hinzufügen
+        audioSource = GetComponent<AudioSource>();
+        if (audioSource == null)
+        {
+            audioSource = gameObject.AddComponent<AudioSource>();
+        }
+
+        // Audioclip für Start abspielen
+        if (startClip != null)
+        {
+            audioSource.PlayOneShot(startClip);
+        }
+    }
+
+    void handleDestroyAudio()
+    {
+        if (destroyClip != null)
+        {
+            audioSource.PlayOneShot(destroyClip);
+        }
+    }
+
     void rise()
     {
         Vector3 upwardMovement = Vector3.up * riseSpeed * Time.fixedDeltaTime;
@@ -69,6 +103,8 @@ public class npcPeaker2 : MonoBehaviour
         {
             GameManager.Instance.ResetScore();
         }
+
+        handleDestroyAudio();
     }
 
     void OnTriggerEnter(Collider other)
@@ -77,6 +113,11 @@ public class npcPeaker2 : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             gotHit = true;
+            // Partikel-Effekt abspielen
+            if (hitEffectPrefab != null)
+            {
+                Instantiate(hitEffectPrefab, transform.position, Quaternion.identity);
+            }
             Destroy(gameObject);
         }
     }

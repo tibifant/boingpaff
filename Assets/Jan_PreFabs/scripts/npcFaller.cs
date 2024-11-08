@@ -2,12 +2,15 @@ using UnityEngine;
 
 public class LimitSpeed : MonoBehaviour
 {
+    public GameObject scaleReference;
     public float maxSpeed; // Maximale Geschwindigkeit
     public int scoreValue = 1;
 
     private Rigidbody rb;
     private npcSpawnManagement spawnManager;
     private bool gotHit = false;
+
+    public GameObject hitEffectPrefab; // Prefab für den Partikel-Effekt
 
     void Start()
     {
@@ -23,7 +26,7 @@ public class LimitSpeed : MonoBehaviour
         {
             rb.velocity = rb.velocity.normalized * maxSpeed;
         }
-        if(rb.position.y < -5.8)
+        if(rb.position.y < scaleReference.transform.localScale.y/1.9)
         {
             Destroy(gameObject);
         }
@@ -47,6 +50,11 @@ public class LimitSpeed : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             gotHit = true;
+            // Partikel-Effekt abspielen
+            if (hitEffectPrefab != null)
+            {
+                Instantiate(hitEffectPrefab, transform.position, Quaternion.identity);
+            }
             Destroy(gameObject);
         }
     }

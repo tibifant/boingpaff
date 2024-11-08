@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class npcSpawnManagement : MonoBehaviour
 {
-    public GameObject[] npcs;         
+    public GameObject[] npcs; 
+    public float ySpawnPosition = 0.11f;
     public float minSpawnInterval = 1f;   // Minimaler Zeitabstand zwischen Spawns
     public float maxSpawnInterval = 5f;
 
@@ -60,14 +61,16 @@ public class npcSpawnManagement : MonoBehaviour
 
     void setSpawnPoints()
     {
-        spawnPoints.Add(0, new Vector3(0.496f, 0, 1.039f));
-        spawnPoints.Add(1, new Vector3(0.887f, 0, 0.864f));
-        spawnPoints.Add(2, new Vector3(1.085f, 0, 0.381f));
-        spawnPoints.Add(3, new Vector3(0.881f, 0, -0.045f));
-        spawnPoints.Add(4, new Vector3(0.429f, 0, -0.204f));
-        spawnPoints.Add(5, new Vector3(0, 0, 0));
-        spawnPoints.Add(6, new Vector3(-0.157f, 0, 0.454f));
-        spawnPoints.Add(7, new Vector3(0.048f, 0, 0.879f));
+        ySpawnPosition = 0.11f;
+
+        spawnPoints.Add(0, new Vector3(0.496f, ySpawnPosition, 1.039f));
+        spawnPoints.Add(1, new Vector3(0.887f, ySpawnPosition, 0.864f));
+        spawnPoints.Add(2, new Vector3(1.085f, ySpawnPosition, 0.381f));
+        spawnPoints.Add(3, new Vector3(0.881f, ySpawnPosition, -0.045f));
+        spawnPoints.Add(4, new Vector3(0.429f, ySpawnPosition, -0.204f));
+        spawnPoints.Add(5, new Vector3(0, ySpawnPosition, 0));
+        spawnPoints.Add(6, new Vector3(-0.157f, ySpawnPosition, 0.454f));
+        spawnPoints.Add(7, new Vector3(0.048f, ySpawnPosition, 0.879f));
     }
     void setSpawnRotations()
     {
