@@ -13,8 +13,9 @@ Hilf den Bowling-Pins und knacke den Highscore.
 
 Mit dem Bowling-Pin als Schläger versuchst du in Boing! Paff! alle Kugeln, die rund um dich herum aus bunten Röhren spawnen zu zerschlagen. Ihre amüsanten Schreie kündigen an, wo der nächste spawnen wird, aber schnell, Sonst sind sie wieder weg.
 
+
 Things to come: 
-- Mehr Audio cues: *Audio-Dateien sind schon im Projekt und können angehört werden!* Aber noch nicht alle in die Logik integriert.
+- Mehr Audio cues: *Weitere (bisher ungenutzte) Audio-Dateien sind schon im Projekt und können angehört werden!*
 - Gameplay anpassen, Spaß maximieren (Timing etc.)
 - Start-Menü
 - Special Actions für Strikes etc.
@@ -22,4 +23,4 @@ Things to come:
 - Viele bunte Idee für coole Gameplay-Features
 - etc.
 
-Erstellt von: Jan, Frith, Paul, Malin, Hendrik
+Erstellt von: Jan, Frith, Paul, Hendrik, Malin
