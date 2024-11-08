@@ -7,9 +7,10 @@ public class NpcJumper : MonoBehaviour
     private Vector3 startingPosition;
     private float timeSinceStart;
     private npcSpawnManagement spawnManager;
-  public int scoreValue = 1;
+    private bool gotHit = false;
 
-  public float jumpSpeed;
+    public int scoreValue = 1;
+    public float jumpSpeed;
     public float gravity;
 
     void Start()
@@ -44,19 +45,23 @@ public class NpcJumper : MonoBehaviour
     private void OnDestroy()
     {
         spawnManager.setSpawnPositionsInUse(gameObject);
+        if (gotHit && !gameObject.CompareTag("Bomb"))
+        {
+            GameManager.Instance.AddScore(scoreValue);
+        }
+        else if (gotHit && gameObject.CompareTag("Bomb"))
+        {
+            GameManager.Instance.ResetScore();
+        }
     }
 
     void OnTriggerEnter(Collider other)
     {
-        //Debug.Log("Collision detected with: " + collision.gameObject.name);
 
         if (other.CompareTag("Player"))
         {
+            gotHit = true;
             Destroy(gameObject);
-      GameManager.Instance.AddScore(scoreValue);
-
-      // if gameobject needs to persist just stop rendering it
-      //rend.enabled = false;
-    }
+        }
     }
 }

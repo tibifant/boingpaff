@@ -8,12 +8,13 @@ public class npcPeaker2 : MonoBehaviour
     public float restingPointY = 5f;
     public float restingTime = 1f;
     public float riseSpeed = 0.5f;
-  public int scoreValue = 1;
+    public int scoreValue = 1;
 
-  private Rigidbody rb;
+    private Rigidbody rb;
     private float timeResting;
     private bool hasRisen;
     private npcSpawnManagement spawnManager;
+    private bool gotHit = false;
 
     void Start()
     {
@@ -60,19 +61,23 @@ public class npcPeaker2 : MonoBehaviour
     private void OnDestroy()
     {
         spawnManager.setSpawnPositionsInUse(gameObject);
+        if (gotHit && !gameObject.CompareTag("Bomb"))
+        {
+            GameManager.Instance.AddScore(scoreValue);
+        }
+        else if (gotHit && gameObject.CompareTag("Bomb"))
+        {
+            GameManager.Instance.ResetScore();
+        }
     }
 
     void OnTriggerEnter(Collider other)
     {
-        //Debug.Log("Collision detected with: " + collision.gameObject.name);
 
         if (other.CompareTag("Player"))
         {
+            gotHit = true;
             Destroy(gameObject);
-      GameManager.Instance.AddScore(scoreValue);
-
-      // if gameobject needs to persist just stop rendering it
-      //rend.enabled = false;
-    }
+        }
     }
 }
