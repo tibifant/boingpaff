@@ -378,7 +378,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77ad617d71624074391ba25d4c25294f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxSpeed: 7
+  scaleReference: {fileID: 448201673636243348}
+  maxSpeed: 10
+  scoreValue: 1
+  hitEffectPrefab: {fileID: 1804206099813350, guid: 7ae24d71c8d4340dba055abb1ec8f29b,
+    type: 3}
 --- !u!82 &3484190447756354553
 AudioSource:
   m_ObjectHideFlags: 0
